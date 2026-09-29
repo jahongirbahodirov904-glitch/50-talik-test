@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bahodirov Jahongir Test O‘yini</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2, #6b8dd6, #8e37d7);
+            background-size: 400% 400%;
+            animation: gradientBG 12s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        #game {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            width: 700px;
+            text-align: center;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+        }
+
+        h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 22px;
+            border: none;
+            border-radius: 12px;
+            background: #667eea;
+            color: #fff;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #764ba2;
+        }
+
+        .question {
+            margin: 20px 0;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .options button {
+            margin: 8px 0;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #e0e7ff;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .options button:hover {
+            background: #667eea;
+            color: #fff;
+        }
+
+        #timer {
+            font-weight: bold;
+            color: red;
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        #score {
+            font-size: 20px;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        #feedback {
+            font-size: 18px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .correct {
+            color: green;
+        }
+
+        .wrong {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="game">
+        <h1>Bahodirov Jahongir (8-d) Test O‘yini</h1>
+        <button class="btn" onclick="startGame()">Testni Boshlash</button>
+        <div id="timer"></div>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <div id="feedback"></div>
+        <div id="score"></div>
+    </div>
+
+    <script>
+        const questions = [
+            { q: "Agregat holatlar necha xil?", options: ["3", "4", "2", "5"], answer: 0 },
+            { q: "Qattiq modda zarrachalari qanday joylashadi?", options: ["Tartibsiz", "Tartibli", "Harakatda", "Bo‘sh"], answer: 1 },
+            { q: "Braun harakati nimani isbotlaydi?", options: ["Kuchlar mavjud", "Zarrachalar harakatda", "Gaz qonuni", "Energiya saqlanishi"], answer: 1 },
+            { q: "Gaz zarrachalari qanday harakat qiladi?", options: ["Tartibli", "Tasodifiy", "Umuman harakat qilmaydi", "Faqat pastga"], answer: 1 },
+            { q: "Temperatura nimani o‘lchaydi?", options: ["Ichki energiya", "Zarrachalar tezligi", "Kuch", "Bosim"], answer: 1 },
+            // ... shu tarzda 50 ta savol qo‘shib chiqasan
+        ];
+
+        let current = 0;
+        let score = 0;
+        let wrong = 0;
+        let time = 60;
+        let timer;
+
+        function startGame() {
+            document.querySelector(".btn").style.display = "none";
+            showQuestion();
+        }
+
+        function startTimer() {
+            time = 60;
+            document.getElementById("timer").innerText = "Vaqt: " + time + " soniya";
+            clearInterval(timer);
+            timer = setInterval(() => {
+                time--;
+                document.getElementById("timer").innerText = "Vaqt: " + time + " soniya";
+                if (time <= 0) {
+                    wrong++;
+                    document.getElementById("feedback").innerHTML = "<span class='wrong'>⛔ Vaqt tugadi! Noto‘g‘ri!</span>";
+                    setTimeout(nextQuestion, 1000);
+                }
+            }, 1000);
+        }
+
+        function showQuestion() {
+            if (current >= questions.length) {
+                document.getElementById("question").innerText = "O‘yin tugadi!";
+                document.getElementById("options").innerHTML = "";
+                document.getElementById("score").innerText =
+                    "✅ To‘g‘ri javoblar: " + score + " | ❌ Noto‘g‘ri javoblar: " + wrong;
+                clearInterval(timer);
+                return;
+            }
+            let q = questions[current];
+            document.getElementById("question").innerText = (current + 1) + ". " + q.q;
+            let opts = "";
+            q.options.forEach((opt, i) => {
+                opts += `<button onclick="checkAnswer(${i})">${opt}</button>`;
+            });
+            document.getElementById("options").innerHTML = opts;
+            document.getElementById("feedback").innerHTML = "";
+            startTimer();
+        }
+
+        function checkAnswer(i) {
+            if (i === questions[current].answer) {
+                score++;
+                document.getElementById("feedback").innerHTML = "<span class='correct'>✅ To‘g‘ri!</span>";
+            } else {
+                wrong++;
+                document.getElementById("feedback").innerHTML = "<span class='wrong'>❌ Noto‘g‘ri!</span>";
+            }
+            setTimeout(nextQuestion, 1000);
+        }
+
+        function nextQuestion() {
+            current++;
+            showQuestion();
+        }
+    </script>
+</body>
+
+</html>
