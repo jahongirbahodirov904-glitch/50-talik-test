@@ -1,201 +1,260 @@
 <!DOCTYPE html>
-<html lang="uz">
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Bahodirov Jahongir Test O‘yini</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #667eea, #764ba2, #6b8dd6, #8e37d7);
-            background-size: 400% 400%;
-            animation: gradientBG 12s ease infinite;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Favourite Place — Magic City</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+:root{--navy:#10182d;--ink:#17213b;--muted:#68718a;--gold:#f6c66a;--pink:#ff7799;--blue:#6f9cff;--cream:#fffaf1;--white:#fff}
+*{box-sizing:border-box}
+body{margin:0;background:#0b1020;color:var(--ink);font-family:'DM Sans',sans-serif;overflow:hidden}
+.deck{height:100vh;width:100vw;display:flex;align-items:center;justify-content:center;padding:22px}
+.slide{display:none;position:relative;width:min(1280px,96vw);height:min(720px,92vh);background:var(--cream);border-radius:22px;overflow:hidden;box-shadow:0 28px 90px #0007}
+.slide.active{display:flex;animation:appear .28s ease}
+@keyframes appear{from{opacity:.5;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.content{padding:60px 72px;width:100%;height:100%;position:relative;z-index:2}
+.kicker{text-transform:uppercase;letter-spacing:3px;font-size:12px;font-weight:700;color:#a76e27;margin-bottom:18px}
+h1,h2,h3,p{margin-top:0}
+h1,h2{font-family:'Playfair Display',serif;letter-spacing:-1px}
+h1{font-size:76px;line-height:1.02;margin-bottom:24px}
+h2{font-size:48px;line-height:1.08;margin-bottom:20px}
+h3{font-size:22px;margin-bottom:10px}
+p{font-size:18px;line-height:1.65;color:var(--muted)}
+.small{font-size:14px;line-height:1.5}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid #ffffff70;border-radius:100px;padding:10px 16px;font-size:13px;font-weight:700;letter-spacing:.3px}
+.hero{color:white;background:linear-gradient(90deg,#10182df2 0%,#10182db8 48%,#10182d22 100%),url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Magic_City_parkining_tungi_ko%CA%BBrinishi.jpg/960px-Magic_City_parkining_tungi_ko%CA%BBrinishi.jpg') center/cover}
+.hero .content{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding-left:86px}
+.hero h1 span{color:var(--gold)}
+.hero p{color:#eef1fa;max-width:610px;font-size:20px}
+.hero .bottom-note{position:absolute;bottom:42px;left:86px;font-size:12px;letter-spacing:2px;color:#ffffffb8;text-transform:uppercase}
+.hero .orbit{position:absolute;right:8%;top:15%;width:300px;height:300px;border:1px solid #ffffff65;border-radius:50%;z-index:1}
+.hero .orbit:before,.hero .orbit:after{content:"";position:absolute;border:1px solid #ffffff48;border-radius:50%;inset:28px}
+.hero .orbit:after{inset:58px}
+.pill{background:#f4e6ca;color:#8d5e20;padding:8px 12px;border-radius:30px;font-weight:700;font-size:12px;display:inline-block}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:42px;align-items:center;height:100%}
+.photo{width:100%;height:430px;border-radius:18px;object-fit:cover;box-shadow:0 18px 35px #202b401c}
+.photo.tall{height:500px}
+.photo-box{position:relative}
+.photo-label{position:absolute;bottom:18px;left:18px;background:#10182de8;color:white;padding:12px 16px;border-radius:12px;font-size:13px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+.card{background:white;border:1px solid #eee8dc;border-radius:17px;padding:25px;min-height:170px;box-shadow:0 10px 25px #26324b0a}
+.card .icon{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:#f8e9cb;color:#a66c23;font-size:20px;margin-bottom:18px}
+.card p{font-size:15px;line-height:1.55;margin-bottom:0}
+.statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}
+.stat{padding:25px;background:#fff;border-radius:17px}
+.stat strong{display:block;font:700 39px 'Playfair Display',serif;color:#a76e27}
+.stat span{font-size:13px;color:var(--muted)}
+.dark{background:var(--navy);color:white}
+.dark h2,.dark h3{color:white}
+.dark p{color:#c6ccdc}
+.dark .kicker{color:var(--gold)}
+.dark .card{background:#1b2540;border-color:#2c3650;color:white}
+.dark .card p{color:#c6ccdc}
+.dark .card .icon{background:#2d3550;color:var(--gold)}
+.image-slide{background:#10182d;color:white}
+.image-slide .content{display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(0deg,#10182df5 0%,#10182d99 48%,transparent 100%)}
+.image-slide p{color:#e3e8f3;max-width:700px}
+.image-slide .kicker{color:var(--gold)}
+.image-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.quote{font:600 32px/1.35 'Playfair Display',serif;color:#fff;max-width:850px}
+.quote span{color:var(--gold)}
+.number{position:absolute;right:34px;top:28px;font-size:12px;letter-spacing:2px;color:#8991a6}
+.bullets{list-style:none;padding:0;margin:24px 0}
+.bullets li{font-size:17px;line-height:1.5;margin:14px 0;display:flex;gap:12px;color:#505a73}
+.bullets i{color:#b47a2c;margin-top:5px}
+.dark .bullets li{color:#d3d8e5}
+.two-cards{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:28px}
+.feature{border-radius:18px;padding:28px;background:white;border:1px solid #eee8dc}
+.feature .big-icon{font-size:28px;color:#b47a2c;margin-bottom:22px}
+.feature p{font-size:16px}
+.timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
+.timebox{border-top:3px solid var(--gold);padding:20px 18px;background:#fff;border-radius:0 0 14px 14px}
+.timebox .time{font-weight:700;color:#a76e27;margin-bottom:8px}
+.timebox p{font-size:15px;margin-bottom:0}
+.cta{background:linear-gradient(135deg,#131d36,#263454);color:white}
+.cta .content{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.cta h2{max-width:850px}
+.cta p{color:#d0d6e4;max-width:700px}
+.cta .recommend{font-size:23px;color:var(--gold);font-family:'Playfair Display',serif;margin:16px 0 28px}
+.btn{border:0;border-radius:30px;background:var(--gold);color:#1a2236;font-weight:700;padding:13px 20px;cursor:pointer}
+.controls{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:12px;z-index:10;background:#151d32dd;padding:8px 12px;border-radius:30px;color:white;backdrop-filter:blur(10px)}
+.controls button{width:34px;height:34px;border:0;border-radius:50%;background:#ffffff18;color:white;cursor:pointer}
+.controls button:hover{background:#ffffff35}
+.progress{width:120px;height:4px;background:#ffffff30;border-radius:5px;overflow:hidden}
+.progress span{display:block;height:100%;background:var(--gold);width:7.69%;transition:width .2s}
+.counter{font-size:12px;min-width:44px;text-align:center}
+.source-link{color:#f6c66a;text-decoration:none;border-bottom:1px solid #f6c66a88}
+.source-link:hover{border-bottom-color:#fff}
 
-        @keyframes gradientBG {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        #game {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 30px;
-            border-radius: 20px;
-            width: 700px;
-            text-align: center;
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
-        }
-
-        h1 {
-            color: #333;
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-
-        .btn {
-            padding: 15px 40px;
-            font-size: 22px;
-            border: none;
-            border-radius: 12px;
-            background: #667eea;
-            color: #fff;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: 0.3s;
-        }
-
-        .btn:hover {
-            background: #764ba2;
-        }
-
-        .question {
-            margin: 20px 0;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .options button {
-            margin: 8px 0;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            background: #e0e7ff;
-            cursor: pointer;
-            font-size: 16px;
-            transition: 0.3s;
-        }
-
-        .options button:hover {
-            background: #667eea;
-            color: #fff;
-        }
-
-        #timer {
-            font-weight: bold;
-            color: red;
-            margin: 10px 0;
-            font-size: 18px;
-        }
-
-        #score {
-            font-size: 20px;
-            margin-top: 15px;
-            font-weight: bold;
-        }
-
-        #feedback {
-            font-size: 18px;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-
-        .correct {
-            color: green;
-        }
-
-        .wrong {
-            color: red;
-        }
-    </style>
+/* PREMIUM DARK THEME — applied consistently to every slide */
+:root{--navy:#080d1b;--ink:#f4f6ff;--muted:#c0c8da;--gold:#ffd27a;--pink:#ff83b4;--blue:#8bb4ff;--cream:#0d1426;--white:#f7f9ff}
+body{background:radial-gradient(ellipse at top,#172342 0%,#080d1b 58%,#050812 100%);color:#f4f6ff}
+.slide{background:linear-gradient(145deg,#111b32 0%,#0b1223 70%,#101a30 100%);color:#f4f6ff;border:1px solid #ffffff16;box-shadow:0 30px 100px #0009,0 0 0 1px #f6c66a0a inset}
+.slide:not(.hero):not(.image-slide):not(.cta){background:radial-gradient(ellipse at 100% 0%,#1c2947 0%,#10182b 44%,#0a1020 100%)}
+.kicker{color:var(--gold)}
+h1,h2,h3{color:#f8f9ff}
+p{color:#c0c8da}
+.number{color:#aab6d0}
+.pill{background:#28253a;color:#ffda91;border:1px solid #f6c66a38}
+.card,.feature,.stat,.timebox{background:linear-gradient(145deg,#1a2540,#111a2f);color:#f4f6ff;border:1px solid #ffffff16;box-shadow:0 14px 30px #0002}
+.card h3,.feature h3,.timebox h3{color:#f7f8ff}
+.card p,.feature p,.timebox p{color:#c5cee0}
+.card .icon{background:#2b2b43;color:#ffd27a}
+.stat strong{color:#ffd27a}
+.stat span{color:#c0c8da}
+.bullets li{color:#d5dced}
+.bullets i,.feature .big-icon{color:#ffd27a}
+.timebox{border-top:3px solid #ffd27a}
+.timebox .time{color:#ffd27a}
+.photo{box-shadow:0 20px 45px #0006;border:1px solid #ffffff20}
+.photo-label{background:#080d1bed;border:1px solid #ffffff20;backdrop-filter:blur(10px)}
+.hero{background-image:linear-gradient(90deg,#080d1bf5 0%,#10182dd9 48%,#10182d66 100%),url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Magic_City_parkining_tungi_ko%CA%BBrinishi.jpg/960px-Magic_City_parkining_tungi_ko%CA%BBrinishi.jpg'),url('https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/Magic_city_manzarasi.jpg/1280px-Magic_city_manzarasi.jpg');background-position:center;background-size:cover}
+.image-slide .content{background:linear-gradient(0deg,#080d1bf7 0%,#080d1bc9 48%,#080d1b35 100%)}
+.cta{background:radial-gradient(ellipse at 50% 0%,#26365a 0%,#10182d 48%,#080d1b 100%)}
+.eyebrow{background:#10182d99;border-color:#ffd27a55;color:#fff;backdrop-filter:blur(10px)}
+.source-link{color:#ffd27a;border-bottom-color:#ffd27a88}
+.controls{background:#080d1bed;border:1px solid #ffffff1c;box-shadow:0 12px 35px #0006}
+.controls button{background:#ffffff12}
+.controls button:hover{background:#ffd27a;color:#10182d}
+.progress{background:#ffffff24}
+.progress span{background:linear-gradient(90deg,#ffd27a,#ff9bba)}
+.slide.active{animation:premiumAppear .35s ease}
+@keyframes premiumAppear{from{opacity:.35;transform:translateY(8px) scale(.995)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:800px){
+body{overflow:auto}.deck{height:auto;min-height:100vh;padding:10px;align-items:flex-start}.slide{width:100%;height:auto;min-height:88vh;border-radius:14px}.slide.active{display:block}.content{padding:34px 26px}.hero .content{padding:42px 28px;min-height:88vh}.hero h1{font-size:50px}.hero .bottom-note{left:28px;bottom:25px}h2{font-size:34px}p{font-size:16px}.two-col{grid-template-columns:1fr;gap:22px}.photo,.photo.tall{height:250px}.cards,.statrow,.timeline,.two-cards{grid-template-columns:1fr}.card{min-height:auto}.number{right:18px;top:18px}.controls{bottom:8px}.hero .orbit{width:150px;height:150px;right:-25px;top:20px}.quote{font-size:25px}
+}
+@media print{body{overflow:visible;background:white}.deck{display:block;height:auto;padding:0}.slide{display:flex!important;width:100%;height:100vh;border-radius:0;box-shadow:none;page-break-after:always}.controls{display:none}}
+</style>
 </head>
-
 <body>
-    <div id="game">
-        <h1>Bahodirov Jahongir (8-d) Test O‘yini</h1>
-        <button class="btn" onclick="startGame()">Testni Boshlash</button>
-        <div id="timer"></div>
-        <div class="question" id="question"></div>
-        <div class="options" id="options"></div>
-        <div id="feedback"></div>
-        <div id="score"></div>
-    </div>
-
-    <script>
-        const questions = [
-            { q: "Agregat holatlar necha xil?", options: ["3", "4", "2", "5"], answer: 0 },
-            { q: "Qattiq modda zarrachalari qanday joylashadi?", options: ["Tartibsiz", "Tartibli", "Harakatda", "Bo‘sh"], answer: 1 },
-            { q: "Braun harakati nimani isbotlaydi?", options: ["Kuchlar mavjud", "Zarrachalar harakatda", "Gaz qonuni", "Energiya saqlanishi"], answer: 1 },
-            { q: "Gaz zarrachalari qanday harakat qiladi?", options: ["Tartibli", "Tasodifiy", "Umuman harakat qilmaydi", "Faqat pastga"], answer: 1 },
-            { q: "Temperatura nimani o‘lchaydi?", options: ["Ichki energiya", "Zarrachalar tezligi", "Kuch", "Bosim"], answer: 1 },
-            // ... shu tarzda 50 ta savol qo‘shib chiqasan
-        ];
-
-        let current = 0;
-        let score = 0;
-        let wrong = 0;
-        let time = 60;
-        let timer;
-
-        function startGame() {
-            document.querySelector(".btn").style.display = "none";
-            showQuestion();
-        }
-
-        function startTimer() {
-            time = 60;
-            document.getElementById("timer").innerText = "Vaqt: " + time + " soniya";
-            clearInterval(timer);
-            timer = setInterval(() => {
-                time--;
-                document.getElementById("timer").innerText = "Vaqt: " + time + " soniya";
-                if (time <= 0) {
-                    wrong++;
-                    document.getElementById("feedback").innerHTML = "<span class='wrong'>⛔ Vaqt tugadi! Noto‘g‘ri!</span>";
-                    setTimeout(nextQuestion, 1000);
-                }
-            }, 1000);
-        }
-
-        function showQuestion() {
-            if (current >= questions.length) {
-                document.getElementById("question").innerText = "O‘yin tugadi!";
-                document.getElementById("options").innerHTML = "";
-                document.getElementById("score").innerText =
-                    "✅ To‘g‘ri javoblar: " + score + " | ❌ Noto‘g‘ri javoblar: " + wrong;
-                clearInterval(timer);
-                return;
-            }
-            let q = questions[current];
-            document.getElementById("question").innerText = (current + 1) + ". " + q.q;
-            let opts = "";
-            q.options.forEach((opt, i) => {
-                opts += `<button onclick="checkAnswer(${i})">${opt}</button>`;
-            });
-            document.getElementById("options").innerHTML = opts;
-            document.getElementById("feedback").innerHTML = "";
-            startTimer();
-        }
-
-        function checkAnswer(i) {
-            if (i === questions[current].answer) {
-                score++;
-                document.getElementById("feedback").innerHTML = "<span class='correct'>✅ To‘g‘ri!</span>";
-            } else {
-                wrong++;
-                document.getElementById("feedback").innerHTML = "<span class='wrong'>❌ Noto‘g‘ri!</span>";
-            }
-            setTimeout(nextQuestion, 1000);
-        }
-
-        function nextQuestion() {
-            current++;
-            showQuestion();
-        }
-    </script>
+<div class="deck">
+<section class="slide hero active">
+  <div class="orbit"></div><div class="content">
+    <div class="eyebrow"><i class="fa-solid fa-location-dot"></i> MY FAVOURITE PLACE GUIDE</div>
+    <h1>Discover<br><span>Magic City</span></h1>
+    <p>Magic City is a fun park in Tashkent. It has a castle, rides, fountains and many places to explore.</p>
+    <div class="eyebrow"><i class="fa-solid fa-star"></i> Fun for everyone</div>
+    <div class="bottom-note">A 13-slide English project · Tashkent, Uzbekistan</div>
+  </div><div class="number">01 / 13</div>
+</section>
+<section class="slide">
+  <div class="content"><div class="number">02 / 13</div><div class="kicker">01 — Meet the place</div>
+  <div class="two-col"><div><h2>What is<br>Magic City?</h2><p>Magic City is a fun park in Tashkent, Uzbekistan. You can see a big castle, ride attractions, visit an aquarium, watch a film and eat tasty food.</p><p>Families and friends can enjoy many activities here.</p><span class="pill">Entertainment · Discovery · Memories</span></div>
+  <div class="photo-box"><img class="photo tall" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/Magic_city_manzarasi.jpg/1280px-Magic_city_manzarasi.jpg" alt="Colourful amusement park lights"><div class="photo-label"><i class="fa-solid fa-wand-magic-sparkles"></i> Welcome to a world of fun</div></div></div></div>
+</section>
+<section class="slide dark">
+  <div class="content"><div class="number">03 / 13</div><div class="kicker">02 — Where it is</div>
+  <div class="two-col"><div><h2>In the heart<br>of Tashkent</h2><p>Magic City is in Tashkent, the capital of Uzbekistan. Its address is 174 Babur Street.</p>
+  <ul class="bullets"><li><i class="fa-solid fa-location-dot"></i><span><b>Address:</b> 174 Babur Street, Tashkent</span></li><li><i class="fa-solid fa-bus"></i><span>You can go there by bus or car.</span></li><li><i class="fa-solid fa-map"></i><span>It is close to other central parts of the city.</span></li></ul></div>
+  <div class="photo-box"><img class="photo tall" src="https://upload.wikimedia.org/wikipedia/commons/1/18/Magic_city_fantan.jpg" alt="City skyline at dusk"><div class="photo-label">Tashkent · Uzbekistan</div></div></div></div>
+</section>
+<section class="slide">
+  <div class="content"><div class="number">04 / 13</div><div class="kicker">03 — What can you do?</div><h2>Many fun things to do</h2><p>There are many fun things to do here.</p>
+  <div class="cards">
+   <div class="card"><div class="icon"><i class="fa-solid fa-roller-coaster"></i></div><h3>Ride attractions</h3><p>Try exciting rides and enjoy the thrill with your friends or family.</p></div>
+   <div class="card"><div class="icon"><i class="fa-solid fa-fish-fins"></i></div><h3>Visit the aquarium</h3><p>Discover fascinating underwater life and look at sea creatures.</p></div>
+   <div class="card"><div class="icon"><i class="fa-solid fa-film"></i></div><h3>Watch a movie</h3><p>Relax at the cinema and enjoy a film on a big screen.</p></div>
+   <div class="card"><div class="icon"><i class="fa-solid fa-utensils"></i></div><h3>Eat something tasty</h3><p>Choose from cafés and food places for a break.</p></div>
+   <div class="card"><div class="icon"><i class="fa-solid fa-camera"></i></div><h3>Take photographs</h3><p>Capture colourful buildings, fountains and special moments.</p></div>
+   <div class="card"><div class="icon"><i class="fa-solid fa-music"></i></div><h3>Enjoy the shows</h3><p>Watch the dancing fountains and enjoy the lively atmosphere.</p></div>
+  </div></div>
+</section>
+<section class="slide image-slide">
+  <img class="image-bg" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Magic_City_with_lights.jpg/960px-Magic_City_with_lights.jpg" alt="Colourful lights at an outdoor event">
+  <div class="content"><div class="number" style="color:white">05 / 13</div><div class="kicker">04 — The atmosphere</div><h2>Lights, music & magic</h2><p>In the evening, the castle lights up. You can also watch water dance to music at the fountain show.</p><p class="small">Tip: Check the park's official information for show times before you go.</p></div>
+</section>
+<section class="slide">
+ <div class="content"><div class="number">06 / 13</div><div class="kicker">05 — The themed streets</div>
+  <div class="two-col"><div class="photo-box"><img class="photo tall" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/Magic_city_manzarasi.jpg/1280px-Magic_city_manzarasi.jpg" alt="Colourful European-style town street"><div class="photo-label">A little taste of different cities</div></div>
+  <div><h2>World cities<br>in one place</h2><p>Some streets look like famous cities from around the world.</p><ul class="bullets"><li><i class="fa-solid fa-landmark"></i><span>See streets inspired by world cities.</span></li><li><i class="fa-solid fa-camera-retro"></i><span>Find beautiful places for photos.</span></li><li><i class="fa-solid fa-person-walking"></i><span>Walk around and discover new details.</span></li></ul><p>It feels like taking a mini-trip while staying in Uzbekistan.</p></div></div></div>
+</section>
+<section class="slide dark">
+ <div class="content"><div class="number">07 / 13</div><div class="kicker">06 — Why it is special</div><h2>More than rides</h2><p>Magic City has many kinds of fun in one place.</p>
+  <div class="cards">
+   <div class="card"><div class="icon"><i class="fa-solid fa-people-group"></i></div><h3>For all ages</h3><p>Children and adults can both have fun.</p></div>
+   <div class="card"><div class="icon"><i class="fa-solid fa-cloud-sun"></i></div><h3>Open all year</h3><p>The park is open all year.</p></div>
+   <div class="card"><div class="icon"><i class="fa-solid fa-city"></i></div><h3>A world of themes</h3><p>Different themed streets make the park feel like a collection of destinations.</p></div>
+  </div><div class="statrow"><div class="stat"><strong>21 ha</strong><span>Approximate area reported by visitor information</span></div><div class="stat"><strong>35+</strong><span>Attractions and entertainment options listed on the official site</span></div><div class="stat"><strong>365</strong><span>Days a year — the park is designed for all seasons</span></div></div>
+ </div>
+</section>
+<section class="slide">
+  <div class="content"><div class="number">08 / 13</div><div class="kicker">08 — Five fun facts</div><h2>Did you know?</h2>
+   <div class="cards" style="grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px">
+    <div class="card"><div class="icon"><i class="fa-solid fa-location-dot"></i></div><h3>1. In Tashkent</h3><p>Magic City is in the capital of Uzbekistan.</p></div>
+    <div class="card"><div class="icon"><i class="fa-solid fa-calendar-days"></i></div><h3>2. Open all year</h3><p>You can visit in every season.</p></div>
+    <div class="card"><div class="icon"><i class="fa-solid fa-water"></i></div><h3>3. Big fountain</h3><p>The fountain area is about 8,500 square metres.</p></div>
+    <div class="card"><div class="icon"><i class="fa-solid fa-globe"></i></div><h3>4. World streets</h3><p>Some streets look like Paris, London and Rome.</p></div>
+    <div class="card"><div class="icon"><i class="fa-solid fa-fish"></i></div><h3>5. Aquarium</h3><p>You can see sea animals in the aquarium.</p></div>
+   </div><p class="small" style="margin-top:16px">Facts are based on Magic City’s official website.</p>
+  </div>
+</section>
+<section class="slide image-slide">
+ <img class="image-bg" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Magic_City_parkining_tungi_ko%CA%BBrinishi.jpg/960px-Magic_City_parkining_tungi_ko%CA%BBrinishi.jpg" alt="Friends enjoying an evening together">
+ <div class="content"><div class="number" style="color:white">09 / 13</div><div class="kicker">08 — Who should visit?</div><h2>Have fun together</h2><p>Magic City is a good place to visit with family or friends.</p><div class="quote">“The best part is not only what you see — it is the <span>memories you make</span>.”</div></div>
+</section>
+<section class="slide">
+ <div class="content"><div class="number">10 / 13</div><div class="kicker">09 — The best time to visit</div><h2>When should you go?</h2><p>I think afternoon and evening are good times to visit. You can see the lights and fountain show.</p>
+ <div class="timeline">
+  <div class="timebox"><div class="time"><i class="fa-solid fa-sun"></i> Afternoon</div><h3>Explore</h3><p>Walk around, try attractions and discover the themed streets.</p></div>
+  <div class="timebox"><div class="time"><i class="fa-solid fa-cloud-sun"></i> Early evening</div><h3>Take a break</h3><p>Have a snack, take photos and choose what to see next.</p></div>
+  <div class="timebox"><div class="time"><i class="fa-solid fa-moon"></i> Evening</div><h3>Enjoy the lights</h3><p>Look out for the fountain show and colourful night-time views.</p></div>
+ </div><p class="small" style="margin-top:24px">Opening hours and show schedules can change, so check before travelling.</p>
+ </div>
+</section>
+<section class="slide dark">
+ <div class="content"><div class="number">11 / 13</div><div class="kicker">10 — A simple visit plan</div><h2>Your day at Magic City</h2><p>Here is a simple plan for your visit.</p>
+ <div class="two-col" style="margin-top:24px"><div>
+ <ul class="bullets"><li><i class="fa-solid fa-check-circle"></i><span><b>1. Arrive and explore</b><br>Look around and choose the attractions you like.</span></li><li><i class="fa-solid fa-check-circle"></i><span><b>2. Try an activity</b><br>Visit an attraction or explore the aquarium.</span></li><li><i class="fa-solid fa-check-circle"></i><span><b>3. Take a food break</b><br>Enjoy a snack or meal at a café.</span></li><li><i class="fa-solid fa-check-circle"></i><span><b>4. Finish with a highlight</b><br>Take photos and check whether a fountain show is scheduled.</span></li></ul></div>
+ <div class="photo-box"><img class="photo" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/Magic_city_manzarasi.jpg/1280px-Magic_city_manzarasi.jpg" alt="People gathering at an outdoor celebration"><div class="photo-label">Plan less, enjoy more</div></div></div>
+ </div>
+</section>
+<section class="slide">
+ <div class="content"><div class="number">12 / 13</div><div class="kicker">11 — My recommendation</div>
+ <div class="two-col"><div><h2>Why I like it</h2><p>I recommend Magic City because it has fun rides, pretty views and a big fountain. You can have a good time with family and friends.</p><ul class="bullets"><li><i class="fa-solid fa-check"></i><span><b>You should visit</b> if you enjoy fun places and colourful scenery.</span></li><li><i class="fa-solid fa-heart"></i><span><b>I think you'll enjoy</b> the attractions and evening atmosphere.</span></li><li><i class="fa-solid fa-star"></i><span><b>It's a great place because</b> there is something for different ages.</span></li><li><i class="fa-solid fa-bell"></i><span><b>Don't forget to</b> check opening times and show schedules.</span></li></ul></div>
+ <div class="photo-box"><img class="photo tall" src="https://upload.wikimedia.org/wikipedia/commons/1/18/Magic_city_fantan.jpg" alt="Beautiful travel destination at sunset"><div class="photo-label">A day worth remembering</div></div></div></div>
+</section>
+<section class="slide cta">
+ <div class="content"><div class="number" style="color:#aab3c8">13 / 13</div><div class="kicker">Thank you for listening</div><h2>Let's make a little magic!</h2><p>Magic City is a fun place to walk, take photos and make memories. Visit it when you are in Tashkent.</p><div class="recommend">“You should visit Magic City — I think you'll enjoy it!”</div><div class="eyebrow"><i class="fa-solid fa-location-dot"></i> 174 Babur Street · Tashkent, Uzbekistan</div><p class="small" style="margin-top:28px">Information sources: <a class="source-link" href="https://magiccity.uz/" target="_blank" rel="noopener">Official Magic City website</a> · <a class="source-link" href="https://visittashkent.uz/places/magic-city/" target="_blank" rel="noopener">Visit Tashkent guide</a></p><p class="small">Photo images are illustrative. This presentation is designed for a 2–3 minute class presentation.</p></div>
+</section>
+</div>
+<div class="controls">
+ <button id="prev" aria-label="Previous slide"><i class="fa-solid fa-chevron-left"></i></button>
+ <span class="counter" id="counter">01 / 13</span>
+ <div class="progress"><span id="bar"></span></div>
+ <button id="next" aria-label="Next slide"><i class="fa-solid fa-chevron-right"></i></button>
+ <button id="full" aria-label="Toggle full screen"><i class="fa-solid fa-expand"></i></button>
+</div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];let index=0;
+function show(n){index=(n+slides.length)%slides.length;slides.forEach((s,i)=>s.classList.toggle('active',i===index));document.getElementById('counter').textContent=String(index+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');document.getElementById('bar').style.width=((index+1)/slides.length*100)+'%'}
+document.getElementById('prev').addEventListener('click',()=>show(index-1));
+document.getElementById('next').addEventListener('click',()=>show(index+1));
+document.getElementById('full').addEventListener('click',()=>{if(!document.fullscreenElement){document.documentElement.requestFullscreen?.()}else{document.exitFullscreen?.()}});
+document.addEventListener('keydown',e=>{if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();show(index+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(index-1)}if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1)});
+let touchX=0;document.addEventListener('touchstart',e=>touchX=e.changedTouches[0].screenX,{passive:true});document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].screenX-touchX;if(Math.abs(dx)>60)show(index+(dx<0?1:-1))},{passive:true});
+// If a photo host fails, try another verified Magic City photo.
+const magicCityImageBackups = [
+  "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/Magic_city_manzarasi.jpg/1280px-Magic_city_manzarasi.jpg",
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Magic_City_parkining_tungi_ko%CA%BBrinishi.jpg/960px-Magic_City_parkining_tungi_ko%CA%BBrinishi.jpg",
+  "https://upload.wikimedia.org/wikipedia/commons/1/18/Magic_city_fantan.jpg",
+  "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Magic_City_with_lights.jpg/960px-Magic_City_with_lights.jpg"
+];
+document.querySelectorAll('img').forEach(img => {
+  img.dataset.backupIndex = '0';
+  img.addEventListener('error', function () {
+    const i = Number(this.dataset.backupIndex || 0);
+    if (i < magicCityImageBackups.length) {
+      this.dataset.backupIndex = String(i + 1);
+      this.src = magicCityImageBackups[i];
+    } else {
+      this.style.display = 'none';
+    }
+  });
+});
+</script>
 </body>
-
 </html>
